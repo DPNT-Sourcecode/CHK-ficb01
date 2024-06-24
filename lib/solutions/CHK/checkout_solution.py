@@ -17,10 +17,9 @@ class Item:
         free_items = []
         if count > 0:
             if self.offer is not None:
-                offer_count = count
-                while offer_count > 0:
-                    if self.offer.free_sku in skus and offer_count >= self.offer.quantity:
-                        offer_count -= self.offer.quantity
+                while count > 0:
+                    if self.offer.free_sku in skus and count >= self.offer.quantity:
+                        count -= self.offer.quantity
                         skus.remove(self.offer.free_sku)
                         free_items.append(self.offer.free_sku)
                     else:
@@ -62,8 +61,11 @@ def checkout(skus):
         count = sku_list.count(sku)
         for free_sku in price_table[sku].calculate_offers(count, [*skus]):
             sku_list.remove(free_sku)
+    for sku in price_table:
+        count = sku_list.count(sku)
         price += price_table[sku].calculate_discounts(count)
     return price
+
 
 
 
