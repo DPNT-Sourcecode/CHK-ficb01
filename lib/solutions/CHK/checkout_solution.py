@@ -5,6 +5,11 @@ import re
 from typing import Optional
 
 @dataclass
+class offer:
+    quantity: int
+    price: Optional[int]
+    free_sku: Optional[str]
+@dataclass
 class item:
     price: int
     offer_quantity: Optional[int]
@@ -37,9 +42,5 @@ def checkout(skus):
                     price += price_table[sku].price * count
                     count = 0
     return price
-
-
-
-
 
 

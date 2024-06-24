@@ -17,5 +17,3 @@ class TestCheckout():
         assert checkout_solution.checkout("-") == -1
 
 
-
-
