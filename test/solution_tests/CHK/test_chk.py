@@ -15,6 +15,13 @@ class TestCheckout():
         assert checkout_solution.checkout("AAaBbD") == -1
     def test_checkout_invalid(self):
         assert checkout_solution.checkout("-") == -1
+    def test_checkout_e(self):
+        assert checkout_solution.checkout("E") == 40
+    def test_checkout_e_freeB(self):
+        assert checkout_solution.checkout("EEB") == 80
+    def test_checkout_double_e_no_b(self):
+        assert checkout_solution.checkout("EE") == 80
+
 
 
 
