@@ -22,6 +22,7 @@ class Item:
                     if self.offer.free_sku in skus and offer_count >= self.offer.quantity:
                         price -= price_table[self.offer.free_sku].price
                         offer_count -= self.offer.quantity
+                        skus.remove(self.offer.free_sku)
                     else:
                         break
             while count > 0 :
@@ -55,7 +56,8 @@ def checkout(skus):
     print(skus)
     for sku in price_table:
         count = skus.count(sku)
-        price += price_table[sku].calculate_offers(count, skus)
+        price += price_table[sku].calculate_offers(count, [*skus])
     return price
+
 
 
