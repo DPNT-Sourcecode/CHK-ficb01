@@ -10,7 +10,6 @@ class Offer:
     free_sku: Optional[str]
 @dataclass
 class Item:
-    sku: str
     price: int
     offer: Optional[Offer]
     discounts: dict[int, int]
@@ -64,12 +63,13 @@ def checkout(skus):
     sku_list = [*skus]
     for sku in price_table:
         count = sku_list.count(sku)
-        for free_sku in price_table[sku].calculate_offers(count, [*skus]):
+        for free_sku in price_table[sku].calculate_offers(count, [*skus], sku):
             sku_list.remove(free_sku)
     for sku in price_table:
         count = sku_list.count(sku)
         price += price_table[sku].calculate_discounts(count)
     return price
+
 
 
 
