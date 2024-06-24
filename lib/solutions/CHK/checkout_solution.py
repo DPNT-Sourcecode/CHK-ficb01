@@ -14,17 +14,21 @@ class Item:
     offer: Optional[Offer]
     discounts: dict[int, int]
     def calculate_offers(self, count, skus):
-        price = 0
+        free_items = []
         if count > 0:
             if self.offer is not None:
                 offer_count = count
                 while offer_count > 0:
                     if self.offer.free_sku in skus and offer_count >= self.offer.quantity:
-                        price -= price_table[self.offer.free_sku].price
                         offer_count -= self.offer.quantity
                         skus.remove(self.offer.free_sku)
+                        free_items.append(self.offer.free_sku)
                     else:
                         break
+        return free_items
+    def calculate_discounts(self, count):
+        price = 0
+        if count > 0:
             while count > 0 :
                 for quantity, discount in self.discounts.items():
                     if count >= quantity:
@@ -34,8 +38,6 @@ class Item:
                 if len(self.discounts) == 0 or count < list(self.discounts)[-1]:
                     price += self.price * count
                     count = 0
-        return price
-
 
 price_table = {
     'A': Item(50, None, {5: 200, 3: 130}),
@@ -54,10 +56,12 @@ def checkout(skus):
         return -1
     price = 0
     print(skus)
+    sku_list = [*skus]
     for sku in price_table:
         count = skus.count(sku)
         price += price_table[sku].calculate_offers(count, [*skus])
     return price
+
 
 
 
