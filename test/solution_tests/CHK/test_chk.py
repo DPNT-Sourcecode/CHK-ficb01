@@ -21,5 +21,11 @@ class TestCheckout():
         assert checkout_solution.checkout("EEB") == 80
     def test_checkout_double_e_no_b(self):
         assert checkout_solution.checkout("EE") == 80
+    def test_checkout_double_b(self):
+        assert checkout_solution.checkout("EEEEBB") == 160
+    def test_checkout_double(self):
+        assert checkout_solution.checkout("ABCDEABCDE") == 280
+
+
 
 
