@@ -12,12 +12,13 @@ class item:
 price_table = {
     'A': item(50, 3, 130),
     'B': item(30, 2, 45),
-    'C': item(20),
-    'D': item(15),
+    'C': item(20, None, None),
+    'D': item(15, None, None),
 }
 
 def checkout(skus):
     print(skus)
+
 
 
 

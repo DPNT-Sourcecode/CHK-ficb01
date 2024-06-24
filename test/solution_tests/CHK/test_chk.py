@@ -1,1 +1,2 @@
-from solutions.CHK import chk_solution
+from solutions.CHK import checkout_solution
+
