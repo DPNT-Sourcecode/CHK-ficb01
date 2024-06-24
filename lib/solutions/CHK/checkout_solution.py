@@ -17,7 +17,20 @@ price_table = {
 }
 
 def checkout(skus):
+    price = 0
     print(skus)
+    for sku in price_table:
+        count = skus.count(sku)
+        if count > 0:
+            while count > 0:
+                if count >= price_table[sku].offer_quantity:
+                    price += price_table[sku].offer_price
+                    count -= price_table[sku].offer_quantity
+                else:
+                    price += price_table[sku].price * count
+                    count = 0
+    return price
+
 
 
 
