@@ -17,10 +17,11 @@ price_table = {
     'D': item(15, None, None),
 }
 
-sku_regex = re.compile('[A-D]')
+sku_regex = re.compile('^[A-D]+$')
 
 def checkout(skus):
     if not sku_regex.match(skus):
+        print("No match")
         return -1
     price = 0
     print(skus)
@@ -35,6 +36,7 @@ def checkout(skus):
                     price += price_table[sku].price * count
                     count = 0
     return price
+
 
 
 
