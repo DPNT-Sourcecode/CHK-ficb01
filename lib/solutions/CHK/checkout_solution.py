@@ -7,7 +7,6 @@ from typing import Optional
 @dataclass
 class Offer:
     quantity: int
-    price: Optional[int]
     free_sku: Optional[str]
 @dataclass
 class Item:
@@ -17,24 +16,24 @@ class Item:
     def calculate_offers(self, count):
         price = 0
         if count > 0:
-            while count > 0:
-                for quantity, discount in self.discounts.items()
+
+            while count > 0 :
+                for quantity, discount in self.discounts.items():
                     if count >= quantity:
                         price += discount
                         count -= quantity
-
-                if price_table[sku].offer_quantity is not None and count >= price_table[sku].offer_quantity:
-                    
-                else:
-                    price += price_table[sku].price * count
+                        break
+                if count < self.discounts.keys()[-1]:
+                    price += self.price * count
                     count = 0
+
 
 price_table = {
     'A': Item(50, None, {5: 200, 3: 130}),
-    'B': Item(30, [Offer(2, 45, None)]),
+    'B': Item(30, None, {2: 45}),
     'C': Item(20, []),
     'D': Item(15, []),
-    'E': Item(40, [Offer(2, None, 'B')]),
+    'E': Item(40, [Offer(2, None, 'B')], None),
 }
 
 sku_regex = re.compile('^[A-D]+$')
@@ -50,5 +49,6 @@ def checkout(skus):
         count = skus.count(sku)
         
     return price
+
 
 
