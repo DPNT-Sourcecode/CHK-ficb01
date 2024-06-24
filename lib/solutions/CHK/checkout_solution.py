@@ -16,9 +16,10 @@ class Item:
 
 price_table = {
     'A': Item(50, [Offer(3, 130, None), Offer(5, 200, None)]),
-    'B': Item(30, 2, 45),
-    'C': Item(20, None, None),
-    'D': Item(15, None, None),
+    'B': Item(30, [Offer(2, 45, None)]),
+    'C': Item(20, []),
+    'D': Item(15, []),
+    'E': Item(40, [Offer(2, None, 'B')]),
 }
 
 sku_regex = re.compile('^[A-D]+$')
@@ -41,6 +42,7 @@ def checkout(skus):
                     price += price_table[sku].price * count
                     count = 0
     return price
+
 
 
 
