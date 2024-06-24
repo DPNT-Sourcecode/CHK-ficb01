@@ -64,9 +64,14 @@ price_table = {
     'S': Item(30, None, {}),
     'T': Item(20, None, {}),
     'U': Item(40, Offer(3, 'U'), {}),
+    'V': Item(50, None, {3: 130, 2: 90}),
+    'W': Item(20, None, {}),
+    'X': Item(90, None, {}),
+    'Y': Item(10, None, {}),
+    'Z': Item(50, None, {})
 }
 
-sku_regex = re.compile('^[A-F]+$')
+sku_regex = re.compile('^[A-Z]+$')
 
 def checkout(skus):
     if skus == "":
@@ -84,6 +89,7 @@ def checkout(skus):
         count = sku_list.count(sku)
         price += price_table[sku].calculate_discounts(count)
     return price
+
 
 
 
