@@ -38,6 +38,7 @@ class Item:
                 if len(self.discounts) == 0 or count < list(self.discounts)[-1]:
                     price += self.price * count
                     count = 0
+        return price
 
 price_table = {
     'A': Item(50, None, {5: 200, 3: 130}),
@@ -58,9 +59,12 @@ def checkout(skus):
     print(skus)
     sku_list = [*skus]
     for sku in price_table:
-        count = skus.count(sku)
-        price += price_table[sku].calculate_offers(count, [*skus])
+        count = sku_list.count(sku)
+        for free_sku in price_table[sku].calculate_offers(count, [*skus]):
+            sku_list.remove(free_sku)
+        price += price_table[sku].calculate_discounts(count)
     return price
+
 
 
 
