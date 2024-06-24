@@ -10,16 +10,20 @@ class Offer:
     free_sku: Optional[str]
 @dataclass
 class Item:
+    sku: str
     price: int
     offer: Optional[Offer]
     discounts: dict[int, int]
-    def calculate_offers(self, count, skus):
+    def calculate_offers(self, count, skus, own_sku):
         free_items = []
         if count > 0:
             if self.offer is not None:
+                offer_quantity = self.offer.quantity
+                if self.offer.free_sku == own_sku:
+                    offer_quantity+=1
                 while count > 0:
-                    if self.offer.free_sku in skus and count >= self.offer.quantity:
-                        count -= self.offer.quantity
+                    if self.offer.free_sku in skus and count >= offer_quantity:
+                        count -= offer_quantity
                         skus.remove(self.offer.free_sku)
                         free_items.append(self.offer.free_sku)
                     else:
@@ -66,5 +70,6 @@ def checkout(skus):
         count = sku_list.count(sku)
         price += price_table[sku].calculate_discounts(count)
     return price
+
 
 
