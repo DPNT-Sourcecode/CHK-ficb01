@@ -54,8 +54,9 @@ def checkout(skus):
     print(skus)
     for sku in price_table:
         count = skus.count(sku)
-        
+        price += price_table[sku].calculate_offers(count)
     return price
+
 
 
 
