@@ -16,6 +16,13 @@ class Item:
     def calculate_offers(self, count):
         price = 0
         if count > 0:
+            if len(self.offers)>0:
+                offer_count = count
+                while offer_count > 0:
+                    for offer in self.offers:
+                        if offer_count >= offer.quantity:
+                            price -= price_table[offer.free_sku].price
+                            offer_count -= offer.quantity
 
             while count > 0 :
                 for quantity, discount in self.discounts.items():
@@ -49,6 +56,7 @@ def checkout(skus):
         count = skus.count(sku)
         
     return price
+
 
 
 

@@ -6,7 +6,7 @@ class TestCheckout():
     def test_checkout_deal(self):
         assert checkout_solution.checkout("AAA") == 130
     def test_checkout_multideal(self):
-        assert checkout_solution.checkout("AAAAAA") == 260
+        assert checkout_solution.checkout("AAAAA") == 200
     def test_checkout_multideal_different(self):
         assert checkout_solution.checkout("AAABB") == 175
     def test_checkout_multideal_with_extra(self):
@@ -15,5 +15,6 @@ class TestCheckout():
         assert checkout_solution.checkout("AAaBbD") == -1
     def test_checkout_invalid(self):
         assert checkout_solution.checkout("-") == -1
+
 
 
