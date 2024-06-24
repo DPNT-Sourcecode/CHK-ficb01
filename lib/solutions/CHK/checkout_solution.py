@@ -23,17 +23,12 @@ def checkout(skus):
         count = skus.upper().count(sku)
         if count > 0:
             while count > 0:
-                if count >= price_table[sku].offer_quantity:
+                if price_table[sku].offer_quantity is not None and count >= price_table[sku].offer_quantity:
                     price += price_table[sku].offer_price
                     count -= price_table[sku].offer_quantity
                 else:
                     price += price_table[sku].price * count
                     count = 0
     return price
-
-
-
-
-
 
 
