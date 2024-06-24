@@ -25,6 +25,10 @@ class TestCheckout():
         assert checkout_solution.checkout("EEEEBB") == 160
     def test_checkout_double(self):
         assert checkout_solution.checkout("ABCDEABCDE") == 280
+    def test_checkout_free_f(self):
+        assert checkout_solution.checkout("FFF") == 20
+    def test_checkout_free_f_double(self):
+        assert checkout_solution.checkout("FFFF") == 30
 
 
 
