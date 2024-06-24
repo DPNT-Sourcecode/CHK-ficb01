@@ -1,24 +1,23 @@
 # noinspection PyUnusedLocal
 # skus = unicode string
 from dataclasses import dataclass
+from typing import Optional
 
-
-price_table = {
-    'A': 50,
-    'B': 30,
-    'C': 20,
-    'D': 15
-}
 @dataclass
 class item:
-    sku: str
     price: int
-    offer_quantity: int
-    offer_price: int
-offers = {
+    offer_quantity: Optional[int]
+    offer_price: Optional[int]
 
+price_table = {
+    'A': item(50, 3, 130),
+    'B': item(30, 2, 45),
+    'C': item(20),
+    'D': item(15),
 }
+
 def checkout(skus):
     print(skus)
+
 
 
