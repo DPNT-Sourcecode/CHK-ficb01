@@ -1,6 +1,7 @@
 # noinspection PyUnusedLocal
 # skus = unicode string
 from dataclasses import dataclass
+import re
 from typing import Optional
 
 @dataclass
@@ -16,11 +17,15 @@ price_table = {
     'D': item(15, None, None),
 }
 
+sku_regex = re.compile('[A-D]')
+
 def checkout(skus):
+    if not sku_regex.match(skus):
+        return -1
     price = 0
     print(skus)
     for sku in price_table:
-        count = skus.upper().count(sku)
+        count = skus.count(sku)
         if count > 0:
             while count > 0:
                 if price_table[sku].offer_quantity is not None and count >= price_table[sku].offer_quantity:
@@ -30,5 +35,6 @@ def checkout(skus):
                     price += price_table[sku].price * count
                     count = 0
     return price
+
 
 

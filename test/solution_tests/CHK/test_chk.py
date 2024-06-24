@@ -12,6 +12,10 @@ class TestCheckout():
     def test_checkout_multideal_with_extra(self):
         assert checkout_solution.checkout("AAABBD") == 190
     def test_checkout_lower(self):
-        assert checkout_solution.checkout("AAaBbD") == 190
+        assert checkout_solution.checkout("AAaBbD") == -1
+    
+    def test_checkout_invalid(self):
+        assert checkout_solution.checkout("-") == -1
+
 
 
