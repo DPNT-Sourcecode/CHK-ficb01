@@ -23,5 +23,3 @@ class TestCheckout():
         assert checkout_solution.checkout("EE") == 80
 
 
-
-
