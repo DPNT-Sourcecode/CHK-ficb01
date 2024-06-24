@@ -30,9 +30,10 @@ class Item:
                         price += discount
                         count -= quantity
                         break
-                if len(self.discounts) == 0 or count < self.discounts.keys()[-1]:
+                if len(self.discounts) == 0 or count < list(self.discounts)[-1]:
                     price += self.price * count
                     count = 0
+        return price
 
 
 price_table = {
@@ -56,6 +57,7 @@ def checkout(skus):
         count = skus.count(sku)
         price += price_table[sku].calculate_offers(count)
     return price
+
 
 
 
