@@ -12,7 +12,7 @@ class Offer:
 class Item:
     price: int
     offer: Optional[Offer]
-    discounts = dict[int, int]
+    discounts: dict[int, int]
     def calculate_offers(self, count):
         price = 0
         if count > 0:
@@ -40,7 +40,7 @@ price_table = {
     'B': Item(30, None, {2: 45}),
     'C': Item(20, None, {}),
     'D': Item(15, None, {}),
-    'E': Item(40, Offer(2, None, 'B'), None),
+    'E': Item(40, Offer(2, 'B'), None),
 }
 
 sku_regex = re.compile('^[A-D]+$')
@@ -56,6 +56,7 @@ def checkout(skus):
         count = skus.count(sku)
         price += price_table[sku].calculate_offers(count)
     return price
+
 
 
 
