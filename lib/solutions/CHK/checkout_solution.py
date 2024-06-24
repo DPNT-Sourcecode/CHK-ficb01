@@ -13,9 +13,24 @@ class Offer:
 class Item:
     price: int
     offers: set[Offer]
+    discounts = dict[int, int]
+    def calculate_offers(self, count):
+        price = 0
+        if count > 0:
+            while count > 0:
+                for quantity, discount in self.discounts.items()
+                    if count >= quantity:
+                        price += discount
+                        count -= quantity
+
+                if price_table[sku].offer_quantity is not None and count >= price_table[sku].offer_quantity:
+                    
+                else:
+                    price += price_table[sku].price * count
+                    count = 0
 
 price_table = {
-    'A': Item(50, [Offer(3, 130, None), Offer(5, 200, None)]),
+    'A': Item(50, None, {5: 200, 3: 130}),
     'B': Item(30, [Offer(2, 45, None)]),
     'C': Item(20, []),
     'D': Item(15, []),
@@ -33,15 +48,9 @@ def checkout(skus):
     print(skus)
     for sku in price_table:
         count = skus.count(sku)
-        if count > 0:
-            while count > 0:
-                if price_table[sku].offer_quantity is not None and count >= price_table[sku].offer_quantity:
-                    price += price_table[sku].offer_price
-                    count -= price_table[sku].offer_quantity
-                else:
-                    price += price_table[sku].price * count
-                    count = 0
+        
     return price
+
 
 
 
