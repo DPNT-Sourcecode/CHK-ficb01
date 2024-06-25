@@ -1,5 +1,6 @@
 # noinspection PyUnusedLocal
 # skus = unicode string
+from collections import Counter
 from dataclasses import dataclass
 import re
 from typing import Optional
@@ -47,6 +48,9 @@ class Item:
                     price += self.price * count
                     count = 0
         return price
+    def calculate_multi_discount(self, skus: list) -> int:
+        if type(self.offer) == MultiOffer:
+            counts= Counter(skus)
 
 multi_offer = MultiOffer(["S", "T", "X", "Y", "Z"], 45)
 
@@ -97,9 +101,5 @@ def checkout(skus):
         count = sku_list.count(sku)
         price += price_table[sku].calculate_discounts(count)
     return price
-
-
-
-
 
 
