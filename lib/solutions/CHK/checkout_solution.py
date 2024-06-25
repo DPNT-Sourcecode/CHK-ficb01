@@ -51,6 +51,7 @@ class Item:
         return price
     def calculate_multi_discount(self, skus: list):
         price = 0
+        skus_to_remove = []
         if type(self.offer) == MultiOffer:
             collected_items = []
             for item in skus:
@@ -59,9 +60,9 @@ class Item:
                     if len(collected_items) == self.offer.quantity:
                         price += self.offer.price
                         for item in collected_items:
-                            skus.remove(item)
+                            skus_to_remove.append(item)
                         collected_items = []
-        return skus, price
+        return skus_to_remove, price
 
 
 
@@ -112,11 +113,15 @@ def checkout(skus):
             sku_list.remove(free_sku)
     for sku in price_table:
         count = sku_list.count(sku)
-        price += price_table[sku].calculate_multi_discount(sku_list)
+        remove_skus, multi_price = price_table[sku].calculate_multi_discount(sku_list)
+        price += multi_price
+        for sku in remove_skus:
+            sku_list.remove(sku)
     for sku in price_table:
         count = sku_list.count(sku)
         price += price_table[sku].calculate_discounts(count)
     return price
+
 
 
 
