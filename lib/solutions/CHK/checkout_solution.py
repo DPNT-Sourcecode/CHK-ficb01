@@ -79,7 +79,7 @@ price_table = {
     'H': Item(10, None, {10: 80, 5: 45}),
     'I': Item(35, None, {}),
     'J': Item(60, None, {}),
-    'K': Item(70, None, {2: 150}),
+    'K': Item(70, None, {2: 120}),
     'L': Item(90, None, {}),
     'M': Item(15, None, {}),
     'N': Item(40, Offer(3, 'M'), {}),
@@ -121,6 +121,7 @@ def checkout(skus):
         count = sku_list.count(sku)
         price += price_table[sku].calculate_discounts(count)
     return price
+
 
 
 
