@@ -17,12 +17,12 @@ class MultiOffer:
 @dataclass
 class Item:
     price: int
-    offer: Optional[Offer]
+    offer: Offer | MultiOffer | None
     discounts: dict[int, int]
     def calculate_offers(self, count: int, skus: list, own_sku: str) -> int:
         free_items = []
         if count > 0:
-            if self.offer is not None:
+            if type(self.offer) == Offer:
                 offer_quantity = self.offer.quantity
                 if self.offer.free_sku == own_sku:
                     offer_quantity+=1
@@ -97,6 +97,7 @@ def checkout(skus):
         count = sku_list.count(sku)
         price += price_table[sku].calculate_discounts(count)
     return price
+
 
 
 
