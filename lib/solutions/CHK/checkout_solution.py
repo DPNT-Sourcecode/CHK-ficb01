@@ -53,7 +53,7 @@ price_table = {
     'H': Item(10, None, {10: 80, 5: 45}),
     'I': Item(35, None, {}),
     'J': Item(60, None, {}),
-    'K': Item(80, None, {2: 150}),
+    'K': Item(70, None, {2: 150}),
     'L': Item(90, None, {}),
     'M': Item(15, None, {}),
     'N': Item(40, Offer(3, 'M'), {}),
@@ -61,14 +61,14 @@ price_table = {
     'P': Item(50, None, {5: 200}),
     'Q': Item(30, None, {3: 80}),
     'R': Item(50, Offer(3, 'Q'), {}),
-    'S': Item(30, None, {}),
+    'S': Item(20, None, {}),
     'T': Item(20, None, {}),
     'U': Item(40, Offer(3, 'U'), {}),
     'V': Item(50, None, {3: 130, 2: 90}),
     'W': Item(20, None, {}),
-    'X': Item(90, None, {}),
-    'Y': Item(10, None, {}),
-    'Z': Item(50, None, {})
+    'X': Item(17, None, {}),
+    'Y': Item(20, None, {}),
+    'Z': Item(21, None, {})
 }
 
 sku_regex = re.compile('^[A-Z]+$')
