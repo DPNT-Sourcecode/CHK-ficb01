@@ -48,9 +48,11 @@ class Item:
                     price += self.price * count
                     count = 0
         return price
-    def calculate_multi_discount(self, skus: list) -> int:
+    def calculate_multi_discount(self, skus: list) -> list, int:
         if type(self.offer) == MultiOffer:
             counts= Counter(skus)
+            for item in self.offer.items:
+
 
 multi_offer = MultiOffer(["S", "T", "X", "Y", "Z"], 45)
 
@@ -101,5 +103,6 @@ def checkout(skus):
         count = sku_list.count(sku)
         price += price_table[sku].calculate_discounts(count)
     return price
+
 
 
