@@ -19,7 +19,7 @@ class Item:
     price: int
     offer: Offer | MultiOffer | None
     discounts: dict[int, int]
-    def calculate_offers(self, count: int, skus: list, own_sku: str) -> int:
+    def calculate_free_offers(self, count: int, skus: list, own_sku: str) -> int:
         free_items = []
         if count > 0:
             if type(self.offer) == Offer:
@@ -69,14 +69,14 @@ price_table = {
     'P': Item(50, None, {5: 200}),
     'Q': Item(30, None, {3: 80}),
     'R': Item(50, Offer(3, 'Q'), {}),
-    'S': Item(20, None, {}),
-    'T': Item(20, None, {}),
+    'S': Item(20, multi_offer, {}),
+    'T': Item(20, multi_offer, {}),
     'U': Item(40, Offer(3, 'U'), {}),
     'V': Item(50, None, {3: 130, 2: 90}),
     'W': Item(20, None, {}),
-    'X': Item(17, None, {}),
-    'Y': Item(20, None, {}),
-    'Z': Item(21, None, {})
+    'X': Item(17, multi_offer, {}),
+    'Y': Item(20, multi_offer, {}),
+    'Z': Item(21, multi_offer, {})
 }
 
 sku_regex = re.compile('^[A-Z]+$')
@@ -91,12 +91,13 @@ def checkout(skus):
     sku_list = [*skus]
     for sku in price_table:
         count = sku_list.count(sku)
-        for free_sku in price_table[sku].calculate_offers(count, [*skus], sku):
+        for free_sku in price_table[sku].calculate_free_offers(count, [*skus], sku):
             sku_list.remove(free_sku)
     for sku in price_table:
         count = sku_list.count(sku)
         price += price_table[sku].calculate_discounts(count)
     return price
+
 
 
 
