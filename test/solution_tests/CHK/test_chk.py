@@ -33,6 +33,9 @@ class TestCheckout():
         assert checkout_solution.checkout("FF") == 20
     def test_checkout_normal_g(self):
         assert checkout_solution.checkout("G") == 20
+    def test_checkout_combo(self):
+        assert checkout_solution.checkout("SSSZ") == 65
+
 
 
 
