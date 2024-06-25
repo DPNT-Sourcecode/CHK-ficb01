@@ -40,6 +40,7 @@ class Item:
                     else:
                         break
         return free_items
+
     def calculate_discounts(self, count: int) -> int:
         price = 0
         if count > 0:
@@ -53,22 +54,22 @@ class Item:
                     price += self.price * count
                     count = 0
         return price
+
     def calculate_multi_discount(self, skus: list):
         price = 0
         skus_to_remove = []
         if type(self.offer) == MultiOffer:
             collected_items = []
-            for item in skus:
-                if item in self.offer.items:
-                    collected_items.append(item)
-                    if len(collected_items) == self.offer.quantity:
-                        price += self.offer.price
-                        for item in collected_items:
-                            skus_to_remove.append(item)
-                        collected_items = []
+            for multioffer_item in self.offer.get_expensive_to_cheapest():
+                for item in skus:
+                    if multioffer_item == item:
+                        collected_items.append(item)
+                        if len(collected_items) == self.offer.quantity:
+                            price += self.offer.price
+                            for item in collected_items:
+                                skus_to_remove.append(item)
+                            collected_items = []
         return skus_to_remove, price
-
-
 
 multi_offer = MultiOffer(["S", "T", "X", "Y", "Z"], 45, 3)
 
@@ -125,6 +126,7 @@ def checkout(skus):
         count = sku_list.count(sku)
         price += price_table[sku].calculate_discounts(count)
     return price
+
 
 
 
