@@ -11,8 +11,8 @@ class Offer:
 
 @dataclass
 class MultiOffer:
-    quantity: int
-    free_sku: Optional[str]
+    items: list[str]
+    price: int
 
 @dataclass
 class Item:
@@ -47,6 +47,8 @@ class Item:
                     price += self.price * count
                     count = 0
         return price
+
+multi_offer = MultiOffer(["S", "T", "X", "Y", "Z"], 45)
 
 price_table = {
     'A': Item(50, None, {5: 200, 3: 130}),
@@ -95,6 +97,7 @@ def checkout(skus):
         count = sku_list.count(sku)
         price += price_table[sku].calculate_discounts(count)
     return price
+
 
 
 
