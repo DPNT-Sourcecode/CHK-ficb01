@@ -8,12 +8,18 @@ from typing import Optional
 class Offer:
     quantity: int
     free_sku: Optional[str]
+
+@dataclass
+class MultiOffer:
+    quantity: int
+    free_sku: Optional[str]
+
 @dataclass
 class Item:
     price: int
     offer: Optional[Offer]
     discounts: dict[int, int]
-    def calculate_offers(self, count, skus, own_sku):
+    def calculate_offers(self, count: int, skus: list, own_sku: str) -> int:
         free_items = []
         if count > 0:
             if self.offer is not None:
@@ -28,7 +34,7 @@ class Item:
                     else:
                         break
         return free_items
-    def calculate_discounts(self, count):
+    def calculate_discounts(self, count: int) -> int:
         price = 0
         if count > 0:
             while count > 0 :
@@ -89,5 +95,6 @@ def checkout(skus):
         count = sku_list.count(sku)
         price += price_table[sku].calculate_discounts(count)
     return price
+
 
 
