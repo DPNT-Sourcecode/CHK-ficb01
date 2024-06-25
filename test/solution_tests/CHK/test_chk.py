@@ -35,6 +35,10 @@ class TestCheckout():
         assert checkout_solution.checkout("G") == 20
     def test_checkout_combo(self):
         assert checkout_solution.checkout("SSSZ") == 65
+    def test_multi_offer(self):
+        multi = checkout_solution.MultiOffer(["S", "T", "X", "Y", "Z"], 45, 3)
+        assert multi.get_expensive_to_cheapest() == ["Z", "S", "T", "Y", "X"]
+
 
 
 

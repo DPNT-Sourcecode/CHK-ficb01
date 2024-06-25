@@ -17,7 +17,7 @@ class MultiOffer:
     quantity: 3
     def get_expensive_to_cheapest(self):
         sorted_list = self.items
-        sorted_list.sort(key=lambda x: price_table[x].price)
+        sorted_list.sort(key=lambda x: price_table[x].price, reverse=True)
         return sorted_list
 
 @dataclass
@@ -125,5 +125,6 @@ def checkout(skus):
         count = sku_list.count(sku)
         price += price_table[sku].calculate_discounts(count)
     return price
+
 
 
